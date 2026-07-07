@@ -52,21 +52,21 @@ services:
       - inventree_data:/home/inventree/data
     restart: unless-stopped
 
-inventree-proxy:
-  image: caddy:alpine
-  container_name: inventree-proxy
-  restart: always
-  depends_on:
-    - inventree-server
-  expose:
-    - "80"
-  env_file:
-    - .env
-  volumes:
-    - ./caddy:/etc/caddy:ro
-    - inventree_data:/var/www:ro
-    - inventree_caddy_data:/data
-    - inventree_caddy_config:/config
+  inventree-proxy:
+    image: caddy:alpine
+    container_name: inventree-proxy
+    restart: always
+    depends_on:
+      - inventree-server
+    expose:
+      - "80"
+    env_file:
+      - .env
+    volumes:
+      - ./caddy:/etc/caddy:ro
+      - inventree_data:/var/www:ro
+      - inventree_caddy_data:/data
+      - inventree_caddy_config:/config
     
 volumes:
   inventree_postgres_data:
