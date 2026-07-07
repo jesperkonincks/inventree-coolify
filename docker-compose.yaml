@@ -63,11 +63,14 @@ services:
     env_file:
       - .env
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - type: bind
+        source: ./Caddyfile
+        target: /etc/caddy/Caddyfile
+        read_only: true
       - inventree_data:/var/www:ro
       - inventree_caddy_data:/data
       - inventree_caddy_config:/config
-
+    
 volumes:
   inventree_postgres_data:
   inventree_redis_data:
